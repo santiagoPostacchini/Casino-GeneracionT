@@ -4,6 +4,7 @@ import UserCard from './components/Card.js';
 import { useEffect, useState } from 'react';
 import 'semantic-ui-css/semantic.min.css'
 import UserForm from './components/Form';
+import PutUserForm from './components/PutForm';
 
 
 function App() {
@@ -41,8 +42,9 @@ function App() {
       <div class="userCards">
         {CardsUsuarios}
       </div>
-      <div class="userForm">
+      <div class="Forms">
         <UserForm/>
+        <PutUserForm/>
       </div>
     </div>
   );
