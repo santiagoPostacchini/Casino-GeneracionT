@@ -67,36 +67,32 @@ router.delete('/:nombre', async function(req, res, next) {
 
 /* PUT para actualizar usuarios individualmente */
 
-router.put('/:nombre',async function(req, res, next) {
-
-    const returnIfNotNull = key => key ?? undefined
+router.put('/', async function(req, res, next) {
 
     console.log(req.body);
   
     let usuarioEncontrado = await Usuarios.findOne({
       where : {
-        nombre : req.params.nombre
+        nombre : req.body.Nombre
       },
     });
     if(!usuarioEncontrado){
       res.send({
         status : false,
-        response : {error : "NO SE ENCONTRO EL PERSONAJE"}
+        response : {error : "NO SE ENCONTRO EL USUARIO"}
       });
       return;
     }
     usuarioEncontrado.update({
-      Nombre: returnIfNotNull(req.body.Nombre),
-      Mail: returnIfNotNull(req.body.Mail),
-      Balance: returnIfNotNull(req.body.Balance),
-      Pass: returnIfNotNull(req.body.Pass)
+      Mail: req.body.Mail,
+      Pass: req.body.Pass
     })
   
     await usuarioEncontrado.save();
 
-    let respuesta = await await Usuarios.findOne({
+    let respuesta = await Usuarios.findOne({
       where : {
-        nombre : req.params.nombre
+        nombre : req.body.Nombre
       },
     });
     res.send({
